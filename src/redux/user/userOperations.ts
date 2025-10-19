@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { authAPI } from "@services/apiConfig";
+import { api, setAuthToken } from "@services/apiConfig";
 import { toast } from "react-toastify";
 
 interface UserRequestProps {
@@ -35,10 +35,15 @@ export const register = createAsyncThunk<
   { rejectValue: string }
 >("user/register", async (credentials, thunkAPI) => {
   try {
-    const { data } = await authAPI.post<ResponseProps>(
+    const { data } = await api.post<ResponseProps>(
       "/auth/register",
       credentials
     );
+    if (data.accessToken) {
+      setAuthToken(data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
+    }
+
     toast.success(
       "Registration is successful. Please confirm your email via your mailbox!"
     );
@@ -50,7 +55,6 @@ export const register = createAsyncThunk<
       message = error.response?.data?.message || message;
     }
     toast.error(message);
-
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -62,7 +66,7 @@ export const confirmEmail = createAsyncThunk<
   { rejectValue: string }
 >("user/confirmEmail", async (credentials, thunkAPI) => {
   try {
-    const { data } = await authAPI.post<ConfirmEmailResponse>(
+    const { data } = await api.post<ConfirmEmailResponse>(
       "/auth/confirm-email",
       credentials
     );
@@ -87,10 +91,12 @@ export const login = createAsyncThunk<
   { rejectValue: string }
 >("user/login", async (credentials, thunkAPI) => {
   try {
-    const { data } = await authAPI.post<ResponseProps>(
-      "/auth/login",
-      credentials
-    );
+    const { data } = await api.post<ResponseProps>("/auth/login", credentials);
+    if (data.accessToken) {
+      setAuthToken(data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
+    }
+
     toast.success("Login successful!");
     return data;
   } catch (error: unknown) {
@@ -106,12 +112,14 @@ export const login = createAsyncThunk<
 });
 
 // Logout
-
 export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
   "user/logout",
   async (_, thunkAPI) => {
     try {
-      await authAPI.post("/auth/logout");
+      await api.post("/auth/logout");
+      setAuthToken(null);
+      localStorage.removeItem("accessToken");
+
       toast.success("You are logged out.");
     } catch (error: unknown) {
       let message = "Logout failed";
@@ -133,7 +141,8 @@ export const refresh = createAsyncThunk<
   { rejectValue: string }
 >("user/refresh", async (_, thunkAPI) => {
   try {
-    const { data } = await authAPI.post<ResponseProps>("/auth/refresh");
+    const { data } = await api.post<ResponseProps>("/auth/refresh");
+    setAuthToken(data.accessToken);
     return data;
   } catch (error: unknown) {
     let message = "Refresh failed";
@@ -154,7 +163,7 @@ export const refreshSession = createAsyncThunk<
   { rejectValue: string }
 >("user/refreshSession", async (_, thunkAPI) => {
   try {
-    const { data } = await authAPI.post<ResponseProps>("/auth/refresh-session");
+    const { data } = await api.post<ResponseProps>("/auth/refresh-session");
     return data;
   } catch (error: unknown) {
     let message = "Session refresh failed.";
@@ -174,7 +183,7 @@ export const sendResetPasswordEmail = createAsyncThunk<
   { rejectValue: string }
 >("user/sendResetPasswordEmail", async (payload, thunkAPI) => {
   try {
-    const { data } = await authAPI.post<ConfirmEmailResponse>(
+    const { data } = await api.post<ConfirmEmailResponse>(
       "/auth/send-reset-email",
       payload
     );
@@ -197,7 +206,7 @@ export const resetPassword = createAsyncThunk<
   { rejectValue: string }
 >("user/resetPassword", async (payload, thunkAPI) => {
   try {
-    const { data } = await authAPI.post<ConfirmEmailResponse>(
+    const { data } = await api.post<ConfirmEmailResponse>(
       "/auth/reset-pwd",
       payload
     );
@@ -212,3 +221,5 @@ export const resetPassword = createAsyncThunk<
     return thunkAPI.rejectWithValue(message);
   }
 });
+
+export const toggleLikeVideo = createAsyncThunk;

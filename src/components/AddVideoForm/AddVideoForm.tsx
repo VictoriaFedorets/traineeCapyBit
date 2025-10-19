@@ -4,7 +4,7 @@ import css from "./AddVideoForm.module.css";
 import { useAppSelector } from "redux/hooks";
 import { toast } from "react-toastify";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { selectStatus } from "redux/videos/videosSelectors";
+import { selectStatus } from "redux/videos/selectors";
 
 interface VideoFormProps {
   onClose: () => void;
@@ -35,28 +35,14 @@ export default function AddVideoForm({
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<VideoFormInputs>({
     defaultValues: initialValues || { name: "", url: "", poster: "" },
   });
 
   const videoURL = watch("url");
-  const posterURL = watch("poster");
-
-  const handleFormSubmit: SubmitHandler<VideoFormInputs> = (data) => {
-    // dispatch(
-    //   addVideoToLS({
-    //     name: data.name.trim(),
-    //     url: data.url.trim(),
-    //     poster: data.poster?.trim(),
-    //   })
-    // );
-    onSubmit(data);
-    toast.success(`Video successfully ${initialValues ? "updated" : "added"}!`);
-
-    setIsModalOpen(false);
-    onClose();
-  };
+  const posterInput = watch("poster");
 
   //поля будут заполнены корректно даже если данные приходят асинхронно
   useEffect(() => {
@@ -76,6 +62,55 @@ export default function AddVideoForm({
       return "";
     }
   };
+
+  // Автоматическая подстановка постера для YouTube
+  useEffect(() => {
+    if (videoURL) {
+      const isYouTube =
+        videoURL.includes("youtube.com") || videoURL.includes("youtu.be");
+      if (isYouTube) {
+        const videoId = getYouTubeVideoId(videoURL);
+        if (videoId) {
+          setValue(
+            "poster",
+            `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+          );
+        }
+      }
+    }
+  }, [videoURL, setValue]);
+
+  const handleFormSubmit: SubmitHandler<VideoFormInputs> = async (data) => {
+    let poster = data.poster;
+
+    // Если постера нет, но это YouTube — подставляем дефолтный
+    if (
+      !poster &&
+      (data.url.includes("youtube.com") || data.url.includes("youtu.be"))
+    ) {
+      const videoId = getYouTubeVideoId(data.url);
+      poster = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    }
+
+    if (!poster) {
+      poster = `${window.location.origin}/placeholder.png`;
+    }
+
+    try {
+      await onSubmit({
+        name: data.name.trim(),
+        url: data.url.trim(),
+        poster: poster.trim(),
+      });
+      setIsModalOpen(false);
+      onClose();
+    } catch (err: any) {
+      // показать ошибку от бэкенда
+      toast.error(err.message || "Failed to add video");
+    }
+  };
+
+  const posterForPreview = posterInput || "/placeholder.png";
 
   return (
     <>
@@ -128,12 +163,11 @@ export default function AddVideoForm({
                 type="url"
                 className={css.input}
                 placeholder="Video poster URL"
-                value={posterURL || ""}
                 {...register("poster", {
-                  pattern: {
-                    value: /^https?:\/\/.+$/i,
-                    message: "Enter a valid image URL",
-                  },
+                  validate: (value) =>
+                    !value ||
+                    /^https?:\/\/.+$/i.test(value) ||
+                    "Enter a valid image URL",
                 })}
               />
               {errors.poster && (
@@ -156,11 +190,7 @@ export default function AddVideoForm({
                     allowFullScreen
                   />
                 ) : (
-                  <video
-                    src={videoURL}
-                    poster={posterURL || "/placeholder.png"}
-                    controls
-                  >
+                  <video src={videoURL} poster={posterForPreview} controls>
                     Your browser does not support the video tag.
                   </video>
                 )}

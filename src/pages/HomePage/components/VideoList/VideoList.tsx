@@ -1,23 +1,24 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { loadVideosFromLS } from "redux/videos/videosOperations";
-import { selectVideos } from "redux/videos/videosSelectors";
+import { loadVideos } from "redux/videos/operations";
+import { selectVideos } from "redux/videos/selectors";
 import css from "./VideoList.module.css";
-import { VideoData } from "redux/videos/videosSlice";
+import { VideoData } from "redux/videos/types";
 import { useNavigate } from "react-router-dom";
 import DeleteVideoBtn from "@pages/HomePage/components/VideoList/DeleteVideoBtn/DeleteVideoBtn";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useVideoListPaginated } from "./hooks/useVideoList";
-import Cat from "/favicon.png";
+import InfiniteScrollWrapper from "components/InfiniteScrollWrapper/InfiniteScrollWrapper";
+import { usePaginatedList } from "../../../../hooks/usePaginatedList";
 import AddVideoBtn from "../AddVideoBtn/AddVideoBtn";
+import { selectAccessToken } from "../../../../redux/user/userSelectors";
 
 export default function VideoList() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const videos = useAppSelector(selectVideos);
+  const token = useAppSelector(selectAccessToken);
 
-  const { visibleVideos, showMore, fetchMoreVideos, loading } =
-    useVideoListPaginated({ videos, perPage: 9, delay: 2000 });
+  const { visibleItems, showMore, fetchMoreItems, loading, dataLength } =
+    usePaginatedList({ items: videos, perPage: 9, delay: 2000 });
 
   const getYouTubeThumbnail = (url: string) => {
     try {
@@ -51,29 +52,14 @@ export default function VideoList() {
     }
   };
 
-  // const fetchMoreVideos = () => {
-  //   const nextVideos = videos.slice(
-  //     visibleVideos.length,
-  //     visibleVideos.length + perPage_LOAD
-  //   );
-  //   setVisibleVideos((prevState) => [...prevState, ...nextVideos]);
-  //   if (visibleVideos.length + nextVideos.length >= videos.length) {
-  //     setShowMore(false);
-  //   }
-  // };
-
   useEffect(() => {
-    dispatch(loadVideosFromLS());
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   setVisibleVideos(videos.slice(0, perPage_LOAD));
-  //   setShowMore(videos.length > perPage_LOAD);
-  // }, [videos]);
+    if (!token) return;
+    dispatch(loadVideos());
+  }, [dispatch, token]);
 
   return (
     <>
-      {visibleVideos.length === 0 ? (
+      {visibleItems.length === 0 ? (
         <>
           <h3>Welcome to VideoHub!</h3>
           <p className={css.text}>
@@ -82,26 +68,19 @@ export default function VideoList() {
           <AddVideoBtn />
         </>
       ) : (
-        <InfiniteScroll
-          dataLength={visibleVideos.length}
-          next={fetchMoreVideos}
-          style={{ textAlign: "center" }}
+        <InfiniteScrollWrapper
+          dataLength={dataLength}
           hasMore={showMore}
-          loader={
-            loading && (
-              <h4 className={css.showMoreMessage}>
-                {loading ? "Loading..." : null}
-              </h4>
-            )
-          }
+          next={fetchMoreItems}
+          loading={loading}
           endMessage={
             videos.length > 6 && (
-              <h4 className={css.showMoreMessage}>You have seen all videos!</h4>
+              <p className={css.showMoreMessage}>You have seen all videos!</p>
             )
           }
         >
           <ul className={css.videoList}>
-            {visibleVideos.map((video) => (
+            {visibleItems.map((video) => (
               <li key={video.id} className={css.videoItem}>
                 <div className={css.containerTitle}>
                   <h4 onClick={() => handleClick(video)}>{video.name}</h4>
@@ -140,7 +119,7 @@ export default function VideoList() {
               </li>
             ))}
           </ul>
-        </InfiniteScroll>
+        </InfiniteScrollWrapper>
       )}
     </>
   );

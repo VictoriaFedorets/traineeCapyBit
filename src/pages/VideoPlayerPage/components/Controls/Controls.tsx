@@ -5,11 +5,13 @@ import Timeline from "@pages/VideoPlayerPage/components/Timeline/Timeline";
 import SpeedBtn from "@pages/VideoPlayerPage/components/Buttons/SpeedBtn";
 import { RefObject } from "react";
 import css from "./Controls.module.css";
+import LikeButton from "../LikeButton/LikeButton";
 
 interface ControlsProps {
   videoRef: RefObject<HTMLVideoElement | null>;
   currentTime: number;
   duration: number;
+  videoId?: number;
   setCurrentTime: (time: number) => void;
 }
 
@@ -17,6 +19,7 @@ export default function Controls({
   videoRef,
   currentTime,
   duration,
+  videoId,
   setCurrentTime,
 }: ControlsProps) {
   return (
@@ -33,6 +36,7 @@ export default function Controls({
           <VolumeControlBtn videoRef={videoRef} />
         </div>
         <div className={css.btnFirstBlock}>
+          <LikeButton videoId={videoId} />
           <SpeedBtn videoRef={videoRef} />
           <FullScreenBtn videoRef={videoRef} />
         </div>

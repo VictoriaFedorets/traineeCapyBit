@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import videosReducer from "./videos/videosSlice";
+import videosReducer from "./videos/slice";
 import userReducer from "./user/userSlice";
 
 const persistConfig = {

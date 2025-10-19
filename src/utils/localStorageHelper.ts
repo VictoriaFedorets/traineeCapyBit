@@ -1,4 +1,4 @@
-import { VideoData } from "redux/videos/videosSlice";
+import { VideoData } from "@redux/";
 
 const LS_KEY = "videoData";
 

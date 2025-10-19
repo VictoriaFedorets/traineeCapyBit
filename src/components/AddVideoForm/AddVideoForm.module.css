@@ -86,13 +86,13 @@ iframe {
 
   video,
   iframe {
-    height: 247px;
+    height: 260px;
   }
 }
 
 @media screen and (min-width: 1280px) {
   video,
   iframe {
-    height: 370px;
+    height: 260px;
   }
 }

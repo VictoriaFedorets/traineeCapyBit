@@ -1,0 +1,144 @@
+.commentsSection {
+  margin-top: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.textarea {
+  font-family: inherit;
+  width: 100%;
+  min-height: 40px;
+  max-height: 200px;
+  overflow: hidden;
+  resize: none;
+  font-size: 16px;
+  line-height: 1.4;
+  padding: 10px 14px;
+  border-radius: 12px;
+
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.textarea::placeholder {
+  color: #374151;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #eab845;
+}
+
+.submitBtn {
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  width: 100px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  background: #e9a21e;
+  transition: background-color 0.25s, opacity 0.3s ease;
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
+  background-color: #f5a81b;
+  transform: scale(1.1);
+  margin-left: 5px;
+}
+
+.submitBtn:active {
+  transform: scale(0.97);
+}
+
+.error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.showMoreMessage {
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.commentItem {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.commentItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.author {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.youTag {
+  font-size: 0.8rem;
+  color: #f6c43b;
+  background-color: rgba(200, 202, 206, 0.1);
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin-left: 6px;
+}
+
+.text {
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  line-height: 1.5;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}

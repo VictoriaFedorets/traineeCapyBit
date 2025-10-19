@@ -45,6 +45,8 @@ video {
 }
 
 .showMoreMessage {
+  font-weight: 500;
+  font-size: 14px;
   text-align: center;
   margin-top: 20px;
 }
@@ -83,6 +85,10 @@ video {
 
   .videoItem {
     width: 363px;
+  }
+
+  .videoItem img {
+    height: 260px;
   }
 
   video {

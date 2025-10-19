@@ -18,6 +18,7 @@
 
 .icons {
   width: 15px;
+  height: 15px;
   fill: #aaa7a7;
 }
 
@@ -127,6 +128,7 @@ input[type="range"]::-moz-range-thumb:hover {
 
   .icons {
     width: 18px;
+    height: 18px;
   }
 }
 
@@ -138,5 +140,6 @@ input[type="range"]::-moz-range-thumb:hover {
 
   .icons {
     width: 25px;
+    height: 25px;
   }
 }

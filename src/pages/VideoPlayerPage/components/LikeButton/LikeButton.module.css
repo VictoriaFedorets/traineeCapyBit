@@ -1,0 +1,121 @@
+.btn {
+  width: 35px;
+  height: 25px;
+  gap: 3px;
+  border-radius: 8px;
+  border: 1px solid rgb(32, 32, 32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.liked {
+  color: #ffffff;
+}
+
+.iconWrapper {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: transparent;
+  stroke: #aaa7a7;
+  transition: transform 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
+}
+
+.btn:hover .iconWrapper,
+.btn:focus .iconWrapper {
+  transform: scale(1.2);
+}
+
+.heart-path {
+  fill: transparent;
+  stroke: #aaa7a7;
+  transition: fill 0.2s ease, stroke 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover .icon,
+.btn:focus .icon {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+
+/* Лайк */
+.liked .icon {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+
+.pop {
+  animation: pop-heart 0.3s forwards;
+}
+
+@keyframes pop-heart {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.count {
+  font-size: 12px;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+.countBounce {
+  animation: bounce-count 0.3s forwards;
+}
+
+@keyframes bounce-count {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Адаптив */
+@media screen and (min-width: 768px) {
+  .btn {
+    width: 50px;
+    height: 30px;
+    gap: 4px;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .btn {
+    width: 70px;
+    height: 50px;
+    gap: 5px;
+  }
+
+  .icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .count {
+    font-size: 16px;
+  }
+}

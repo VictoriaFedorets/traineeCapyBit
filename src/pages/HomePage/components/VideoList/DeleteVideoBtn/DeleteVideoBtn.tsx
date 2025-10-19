@@ -1,14 +1,13 @@
 import css from "./DeleteVideoBtn.module.css";
 import { useAppDispatch } from "redux/hooks";
 import { useNavigate } from "react-router-dom";
-import { deleteVideoToLS } from "redux/videos/videosOperations";
+import { deleteVideo } from "redux/videos/operations";
 import Basket from "icons/Basket";
-import { toast } from "react-toastify";
 import { useState } from "react";
 import AreYouSureModal from "@components/AreYouSureModal/AreYouSureModal";
 
 interface DeleteVideoBtnProps {
-  id: string;
+  id: number;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -26,8 +25,8 @@ export default function DeleteVideoBtn({ id }: DeleteVideoBtnProps) {
   const handleCloseModal = () => setIsModalOpen(false);
 
   const handleConfirmDelete = () => {
-    dispatch(deleteVideoToLS(id)).then(() => {
-      toast.success("Video has been deleted!");
+    dispatch(deleteVideo(id)).then(() => {
+      setIsModalOpen(false);
       navigate("/");
     });
   };

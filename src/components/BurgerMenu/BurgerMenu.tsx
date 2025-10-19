@@ -1,5 +1,5 @@
 import css from "./BurgerMenu.module.css";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/user/userSelectors";
 import { Link } from "react-router-dom";
@@ -12,14 +12,11 @@ interface BurgerMenuProps {
   isOpen: boolean;
 }
 
-export default function BurgerMenu({
-  openModal,
-  closeBurger,
-  isOpen,
-}: BurgerMenuProps) {
+export default function BurgerMenu({ closeBurger, isOpen }: BurgerMenuProps) {
   const backdropRef = useRef<HTMLDivElement>(null);
   const user = useSelector(selectUser);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const mounted = useRef(false);
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === backdropRef.current) {
@@ -33,6 +30,16 @@ export default function BurgerMenu({
       closeBurger();
     }
   };
+
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    if (!isLoggedIn && isOpen) {
+      closeBurger();
+    }
+  }, [isLoggedIn, isOpen, closeBurger]);
 
   return (
     <div

@@ -5,7 +5,7 @@ import Plus from "icons/Plus";
 import { useState } from "react";
 import AddVideoForm from "@components/AddVideoForm/AddVideoForm";
 import { useAppDispatch } from "redux/hooks";
-import { addVideoToLS } from "redux/videos/videosOperations";
+import { addVideo } from "redux/videos/operations";
 import Cat from "/favicon.png";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
@@ -36,7 +36,7 @@ export default function AddVideoBtn({ className }: AddVideoBtnProps) {
     poster?: string;
   }) => {
     dispatch(
-      addVideoToLS({
+      addVideo({
         name: data.name.trim(),
         url: data.url.trim(),
         poster: data.poster?.trim(),

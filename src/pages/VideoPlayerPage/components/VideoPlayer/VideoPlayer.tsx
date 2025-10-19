@@ -4,10 +4,10 @@ import css from "./VideoPlayer.module.css";
 import DeleteVideoBtn from "@pages/HomePage/components/VideoList/DeleteVideoBtn/DeleteVideoBtn";
 import EditVideoBtn from "@pages/HomePage/components/EditVideoBtn/EditVideoBtn";
 import { useAppSelector } from "redux/hooks";
-import { selectVideos } from "redux/videos/videosSelectors";
+import { selectVideos } from "redux/videos/selectors";
 
 interface VideoPlayerProps {
-  id: string;
+  id: number;
   name: string;
   src: string;
   poster?: string;
@@ -90,6 +90,7 @@ export default function VideoPlayer({
           currentTime={currentTime}
           duration={duration}
           setCurrentTime={setCurrentTime}
+          videoId={updatedVideo?.id}
         />
       </div>
     </div>

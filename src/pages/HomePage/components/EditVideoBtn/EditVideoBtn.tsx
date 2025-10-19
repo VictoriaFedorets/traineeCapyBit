@@ -3,7 +3,7 @@ import { useState } from "react";
 import Edit from "icons/Edit";
 import AddVideoForm from "@components/AddVideoForm/AddVideoForm";
 import { useAppDispatch } from "redux/hooks";
-import { updateVideoToLS } from "redux/videos/videosOperations";
+import { updateVideo } from "redux/videos/operations";
 
 export default function EditVideoBtn({
   id,
@@ -11,7 +11,7 @@ export default function EditVideoBtn({
   url,
   poster,
 }: {
-  id: string;
+  id: number;
   name: string;
   url: string;
   poster?: string;
@@ -27,7 +27,7 @@ export default function EditVideoBtn({
     url: string;
     poster?: string;
   }) => {
-    dispatch(updateVideoToLS({ id, ...data }));
+    dispatch(updateVideo({ id, ...data }));
     handleClose();
   };
 
