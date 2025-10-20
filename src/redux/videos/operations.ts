@@ -196,3 +196,24 @@ export const fetchLikesCount = createAsyncThunk<
     return thunkAPI.rejectWithValue(message);
   }
 });
+
+// POST /video/:id/view
+// videosOperations.ts
+export const addVideoView = createAsyncThunk<
+  { videoId: number; views: number },
+  { videoId: number },
+  { rejectValue: string }
+>("videos/addView", async ({ videoId }, thunkAPI) => {
+  try {
+    const { data } = await api.post<{ videoId: number; views: number }>(
+      `/video/${videoId}/view`
+    );
+    return data; // { videoId, views }
+  } catch (error: unknown) {
+    let message = "Failed to add view";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || message;
+    }
+    return thunkAPI.rejectWithValue(message);
+  }
+});

@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { useEffect, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { usePaginatedList } from "hooks/usePaginatedList";
@@ -12,6 +11,7 @@ import {
 } from "redux/videos/operations";
 import { VideoComment } from "redux/videos/types";
 import InfiniteScrollWrapper from "components/InfiniteScrollWrapper/InfiniteScrollWrapper";
+import { shallowEqual } from "react-redux";
 
 interface CommentFormInputs {
   text: string;
@@ -23,8 +23,12 @@ interface CommentsSectionProps {
 
 export default function CommentsSection({ videoId }: CommentsSectionProps) {
   const dispatch = useAppDispatch();
-  const comments = useSelector(selectCommentsByVideoId(videoId));
-  const user = useSelector(selectUser);
+  const comments = useAppSelector(
+    selectCommentsByVideoId(videoId),
+    shallowEqual
+  );
+
+  const user = useAppSelector(selectUser);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const {

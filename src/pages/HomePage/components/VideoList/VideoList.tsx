@@ -104,7 +104,7 @@ export default function VideoList() {
                   ) : video.url.includes("youtube.com") ||
                     video.url.includes("youtu.be") ? (
                     <img
-                      src={getYouTubeThumbnail(video.url) || "/placeholder.png"}
+                      src={getYouTubeThumbnail(video.url)}
                       alt="poster video"
                       onError={(e) => {
                         e.currentTarget.src = "/placeholder.png";

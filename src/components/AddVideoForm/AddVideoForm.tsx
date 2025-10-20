@@ -5,6 +5,7 @@ import { useAppSelector } from "redux/hooks";
 import { toast } from "react-toastify";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { selectStatus } from "redux/videos/selectors";
+import { getYouTubeVideoId, getYouTubeThumbnail } from "utils/youtube";
 
 interface VideoFormProps {
   onClose: () => void;
@@ -44,7 +45,6 @@ export default function AddVideoForm({
   const videoURL = watch("url");
   const posterInput = watch("poster");
 
-  //поля будут заполнены корректно даже если данные приходят асинхронно
   useEffect(() => {
     if (initialValues) {
       reset(initialValues);
@@ -69,13 +69,7 @@ export default function AddVideoForm({
       const isYouTube =
         videoURL.includes("youtube.com") || videoURL.includes("youtu.be");
       if (isYouTube) {
-        const videoId = getYouTubeVideoId(videoURL);
-        if (videoId) {
-          setValue(
-            "poster",
-            `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-          );
-        }
+        setValue("poster", getYouTubeThumbnail(videoURL));
       }
     }
   }, [videoURL, setValue]);
@@ -83,13 +77,11 @@ export default function AddVideoForm({
   const handleFormSubmit: SubmitHandler<VideoFormInputs> = async (data) => {
     let poster = data.poster;
 
-    // Если постера нет, но это YouTube — подставляем дефолтный
     if (
       !poster &&
       (data.url.includes("youtube.com") || data.url.includes("youtu.be"))
     ) {
-      const videoId = getYouTubeVideoId(data.url);
-      poster = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      poster = getYouTubeThumbnail(data.url);
     }
 
     if (!poster) {
@@ -105,7 +97,6 @@ export default function AddVideoForm({
       setIsModalOpen(false);
       onClose();
     } catch (err: any) {
-      // показать ошибку от бэкенда
       toast.error(err.message || "Failed to add video");
     }
   };

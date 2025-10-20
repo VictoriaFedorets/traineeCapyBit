@@ -25,13 +25,17 @@ export interface UserStateProps {
   isLoggedIn: boolean;
 }
 
+// Восстанавливаем токены при старте
+const savedAccessToken = localStorage.getItem("accessToken");
+const savedRefreshToken = localStorage.getItem("refreshToken");
+
 const initialState: UserStateProps = {
   user: null,
-  accessToken: null,
-  refreshToken: null,
+  accessToken: savedAccessToken,
+  refreshToken: savedRefreshToken,
   status: "idle",
   error: null,
-  isLoggedIn: false,
+  isLoggedIn: !!savedAccessToken,
 };
 
 const userSlice = createSlice({
@@ -95,12 +99,19 @@ const userSlice = createSlice({
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken ?? null;
         state.isLoggedIn = !!action.payload.accessToken;
-        console.log(
-          "Login fulfilled:",
-          action.payload,
-          "isLoggedIn:",
-          state.isLoggedIn
-        );
+        // console.log(
+        //   "Login fulfilled:",
+        //   action.payload,
+        //   "isLoggedIn:",
+        //   state.isLoggedIn
+        // );
+
+        if (action.payload.accessToken) {
+          localStorage.setItem("accessToken", action.payload.accessToken);
+        }
+        if (action.payload.refreshToken) {
+          localStorage.setItem("refreshToken", action.payload.refreshToken);
+        }
       }
     );
 

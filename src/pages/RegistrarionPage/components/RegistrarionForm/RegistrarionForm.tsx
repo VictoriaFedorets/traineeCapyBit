@@ -1,5 +1,4 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { register } from "redux/user/userOperations";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ import { selectAuthLoading } from "redux/user/userSelectors";
 import Loader from "@components/Loader/Loader";
 import Eye from "icons/Eye";
 import EyeHiddenIcon from "icons/EyeHidden";
-import type { AppDispatch } from "redux/store";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -40,10 +39,10 @@ interface UserFormInputs {
 }
 
 export default function RegistrationForm() {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const isLoading = useSelector(selectAuthLoading);
+  const isLoading = useAppSelector(selectAuthLoading);
 
   const {
     register: formRegister,

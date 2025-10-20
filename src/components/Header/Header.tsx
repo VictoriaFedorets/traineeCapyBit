@@ -4,15 +4,14 @@ import LogoImg from "../../images/logo.png";
 import { Link } from "react-router-dom";
 import BurgerMenu from "@components/BurgerMenu/BurgerMenu";
 import MenuIcon from "icons/Menu";
-
-import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/user/userSelectors";
 import LogOutBtn from "@components/LogOutBtn/LogOutBtn";
+import { useAppSelector } from "redux/hooks";
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const openModal = () => setIsModalOpen(true);
   const toggleBurger = () => setIsBurgerOpen(!isBurgerOpen);

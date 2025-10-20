@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
 import css from "./AddVideoBtn.module.css";
 import { selectIsLoggedIn } from "redux/user/userSelectors";
 import Plus from "icons/Plus";
 import { useState } from "react";
 import AddVideoForm from "@components/AddVideoForm/AddVideoForm";
-import { useAppDispatch } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { addVideo } from "redux/videos/operations";
 import Cat from "/favicon.png";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,7 @@ interface AddVideoBtnProps {
 }
 
 export default function AddVideoBtn({ className }: AddVideoBtnProps) {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);

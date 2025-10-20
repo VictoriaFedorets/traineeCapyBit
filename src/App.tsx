@@ -1,10 +1,9 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import SharedLayout from "layouts/SharedLayout/SharedLayout";
 import ScrollToTop from "@components/ScrollToTop/ScrollToTop";
 import Loader from "@components/Loader/Loader";
-import { setAuthToken } from "@services/apiConfig";
 
 const HomePage = lazy(() => import("@pages/HomePage/HomePage"));
 const VideoPlayerPage = lazy(
@@ -19,11 +18,6 @@ const ConfirmEmailPage = lazy(
 const LoginPage = lazy(() => import("@pages/LoginPage/LoginPage"));
 
 export default function App() {
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) setAuthToken(token);
-  }, []);
-
   return (
     <>
       <ToastContainer

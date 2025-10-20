@@ -6,12 +6,14 @@ import SpeedBtn from "@pages/VideoPlayerPage/components/Buttons/SpeedBtn";
 import { RefObject } from "react";
 import css from "./Controls.module.css";
 import LikeButton from "../LikeButton/LikeButton";
+import ViewsCounter from "../ViewsCounter/ViewsCounter";
 
 interface ControlsProps {
   videoRef: RefObject<HTMLVideoElement | null>;
   currentTime: number;
   duration: number;
   videoId?: number;
+  views: number;
   setCurrentTime: (time: number) => void;
 }
 
@@ -20,6 +22,7 @@ export default function Controls({
   currentTime,
   duration,
   videoId,
+  views,
   setCurrentTime,
 }: ControlsProps) {
   return (
@@ -36,6 +39,7 @@ export default function Controls({
           <VolumeControlBtn videoRef={videoRef} />
         </div>
         <div className={css.btnFirstBlock}>
+          {videoId && <ViewsCounter views={views} />}
           <LikeButton videoId={videoId} />
           <SpeedBtn videoRef={videoRef} />
           <FullScreenBtn videoRef={videoRef} />

@@ -1,14 +1,13 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { confirmEmail } from "redux/user/userOperations";
-import type { AppDispatch } from "redux/store";
+import { useAppDispatch } from "redux/hooks";
 
 const ConfirmEmailPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const handleEmailConfirmation = async () => {
     if (!token) {

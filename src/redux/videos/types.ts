@@ -12,6 +12,7 @@ export interface VideoData {
   likes?: number;
   liked?: boolean;
   comments?: VideoComment[];
+  viewsCount?: number;
 }
 
 export interface VideoComment {

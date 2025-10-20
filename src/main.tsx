@@ -6,6 +6,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "../src/redux/store";
 import App from "./App";
 import "./index.css";
+import { setAuthToken } from "@services/apiConfig";
+
+const token = localStorage.getItem("accessToken");
+if (token) setAuthToken(token);
 
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>

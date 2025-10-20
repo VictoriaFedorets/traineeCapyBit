@@ -9,6 +9,7 @@ import {
   fetchCommentsByVideo,
   toggleLikeVideo,
   fetchLikesCount,
+  addVideoView,
 } from "./operations";
 import { logout } from "../user/userOperations";
 import { FetchCommentsResponse, VideoData, VideosState } from "./types";
@@ -116,7 +117,7 @@ const videosSlice = createSlice({
       // Toggle like
       .addCase(toggleLikeVideo.fulfilled, (state, action) => {
         const { videoId, liked, likes } = action.payload;
-        console.log(action.payload);
+
         const video = state.items.find((v) => v.id === videoId);
         if (video) {
           video.liked = liked;

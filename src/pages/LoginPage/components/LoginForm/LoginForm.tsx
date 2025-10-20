@@ -1,5 +1,4 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { login } from "redux/user/userOperations";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +9,7 @@ import { selectAuthLoading } from "redux/user/userSelectors";
 import Loader from "@components/Loader/Loader";
 import Eye from "icons/Eye";
 import EyeHiddenIcon from "icons/EyeHidden";
-import type { AppDispatch } from "redux/store";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -29,10 +28,9 @@ interface UserFormInputs {
 }
 
 export default function LoginForm() {
-  const dispatch = useDispatch<AppDispatch>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const isLoading = useSelector(selectAuthLoading);
+  const isLoading = useAppSelector(selectAuthLoading);
   const navigate = useNavigate();
 
   const {

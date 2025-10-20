@@ -1,10 +1,10 @@
 import css from "./BurgerMenu.module.css";
 import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/user/userSelectors";
 import { Link } from "react-router-dom";
 import CloseIcon from "icons/Close";
 import LogOutBtn from "@components/LogOutBtn/LogOutBtn";
+import { useAppSelector } from "redux/hooks";
 
 interface BurgerMenuProps {
   openModal: () => void;
@@ -14,8 +14,8 @@ interface BurgerMenuProps {
 
 export default function BurgerMenu({ closeBurger, isOpen }: BurgerMenuProps) {
   const backdropRef = useRef<HTMLDivElement>(null);
-  const user = useSelector(selectUser);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const user = useAppSelector(selectUser);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const mounted = useRef(false);
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
