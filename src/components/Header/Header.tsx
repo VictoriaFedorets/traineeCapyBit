@@ -4,9 +4,11 @@ import LogoImg from "../../images/logo.png";
 import { Link } from "react-router-dom";
 import BurgerMenu from "@components/BurgerMenu/BurgerMenu";
 import MenuIcon from "icons/Menu";
-import { selectIsLoggedIn } from "../../redux/user/userSelectors";
+import { selectIsLoggedIn } from "../../redux/user/selectors";
 import LogOutBtn from "@components/LogOutBtn/LogOutBtn";
 import { useAppSelector } from "redux/hooks";
+import ChatIcon from "icons/Chat";
+import WeatherWidget from "@components/WeatherWidget/WeatherWidget";
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,13 +21,22 @@ export default function Header() {
 
   return (
     <div className={css.conteinerHeader}>
-      <Link to="/">
-        <img className={css.logo} src={LogoImg} alt="Logo" />
-      </Link>
+      <div className={css.conteinerLogo}>
+        <Link to="/">
+          <img className={css.logo} src={LogoImg} alt="Logo" />
+        </Link>
+
+        <WeatherWidget />
+      </div>
 
       <div className={css.btnBlock}>
         {isLoggedIn ? (
-          <LogOutBtn className={css.btnRegister} />
+          <>
+            <Link to="/chats">
+              <ChatIcon className={css.iconChat} />
+            </Link>
+            <LogOutBtn className={css.btnRegister} />
+          </>
         ) : (
           <>
             <Link to="/login" className={css.btnLogin}>

@@ -16,6 +16,8 @@ const ConfirmEmailPage = lazy(
   () => import("@pages/ConfirmEmailPage/ConfirmEmailPage")
 );
 const LoginPage = lazy(() => import("@pages/LoginPage/LoginPage"));
+const ChatsPage = lazy(() => import("@pages/ChatsPage/ChatsPage"));
+const WeatherPage = lazy(() => import("@pages/WeatherPage/WeatherPage"));
 
 export default function App() {
   return (
@@ -38,6 +40,8 @@ export default function App() {
             <Route path="register" element={<RegistrarionPage />} />
             <Route path="confirm-email" element={<ConfirmEmailPage />} />
             <Route path="login" element={<LoginPage />} />
+            <Route path="chats" element={<ChatsPage />} />
+            <Route path="weather" element={<WeatherPage />} />
           </Route>
         </Routes>
       </Suspense>

@@ -9,8 +9,8 @@
 }
 
 .logo {
-  width: 140px;
-  height: 35px;
+  width: 100px;
+  height: 25px;
 }
 
 .logoWrapper,
@@ -19,7 +19,19 @@
   display: none;
 }
 
+.conteinerLogo {
+  display: flex;
+}
+
 @media screen and (min-width: 768px) {
+  .conteinerLogo {
+    gap: 20px;
+  }
+  .logo {
+    width: 140px;
+    height: 35px;
+  }
+
   .burgerBtn {
     display: none;
   }
@@ -33,6 +45,7 @@
   .btnBlock {
     display: flex;
     gap: 10px;
+    align-items: center;
   }
 
   /* .btnPlus {
@@ -88,5 +101,17 @@
   .btnRegister:focus {
     transform: scale(1.01);
     border-color: #f5a81b;
+  }
+
+  .iconChat {
+    width: 20px;
+    height: 20px;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .iconChat:hover,
+  .iconChat:focus {
+    fill: #e9a21e;
+    transform: scale(1.05);
   }
 }

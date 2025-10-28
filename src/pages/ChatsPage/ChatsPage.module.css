@@ -1,0 +1,133 @@
+.containerChats {
+  height: calc(100vh - 112px);
+  padding: 16px;
+  background-color: #f8f8f8;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+h3 {
+  color: #e9a21e;
+}
+
+.chatLayout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 2px;
+  min-height: 0;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-height: 0;
+  z-index: 2;
+  transition: transform 0.3s ease-in-out;
+}
+
+.chatWindow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 1;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.chatLayout.showChat .chatWindow {
+  transform: translateX(0);
+  z-index: 3;
+}
+
+.chatLayout.showChat .sidebar {
+  transform: translateX(-100%);
+}
+
+.emptyChat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999999;
+  font-size: 16px;
+  padding: 8px;
+}
+.headerChats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+/* Кнопка "Назад" справа от заголовка */
+.backButton {
+  display: inline-block;
+  color: #e9a21e;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* ================= Планшет/средние экраны от 768px ================= */
+@media (min-width: 768px) {
+  .chatLayout {
+    flex-direction: row;
+  }
+
+  .sidebar {
+    width: 220px;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: translateX(0) !important;
+    z-index: 2;
+  }
+
+  .chatWindow {
+    position: relative;
+    transform: translateX(0) !important;
+    flex: 1;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .emptyChat {
+    font-size: 18px;
+  }
+
+  .backButton {
+    display: none; /* кнопка скрыта на планшете и десктопе */
+  }
+}
+
+/* ================= Десктоп/широкие экраны от 1280px ================= */
+@media (min-width: 1280px) {
+  .sidebar {
+    width: 350px;
+  }
+
+  .chatWindow {
+    flex: 1;
+  }
+}

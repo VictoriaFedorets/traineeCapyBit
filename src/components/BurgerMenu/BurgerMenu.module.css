@@ -23,13 +23,13 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: fill 0.3s ease-in-out;
 }
 
 .closeBtn:hover,
 .closeBtn:focus {
   fill: #f5a81b;
-  transform: scale(1.01);
+  transform: scale(1.05);
 }
 
 .menuContent {
@@ -44,7 +44,36 @@
   transition: background-color 0.25s, opacity 0.3s ease;
 }
 
-.btnPlus {
+.linkBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 100px;
+  font-weight: 600;
+}
+
+.text {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.btnChat {
+  color: white;
+  transition: color 0.3s ease-in-out;
+}
+
+.iconChat {
+  margin-left: 5px;
+}
+
+.btnChat:hover,
+.btnChat:focus {
+  color: #e9a21e;
+  fill: #e9a21e;
+}
+
+/* .btnPlus {
   margin-top: 30px;
   padding: 10px 20px;
   border: none;
@@ -70,17 +99,10 @@
   border-color: #f5a81b;
 }
 
-.text {
-  margin-top: 100px;
-  text-align: center;
-  font-weight: 600;
-  transition: color 0.2s;
-}
-
 .iconPlus {
   fill: white;
   width: 15px;
-}
+} */
 
 .btnBlock {
   display: flex;

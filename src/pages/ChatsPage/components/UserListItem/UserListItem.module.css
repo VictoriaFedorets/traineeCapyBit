@@ -1,0 +1,31 @@
+.resultItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-left: 4px solid transparent;
+}
+
+.resultItem:hover {
+  background-color: #fff2e6;
+}
+
+.highlight {
+  background-color: #ffe0cc;
+  border-left: 4px solid #e9a21e;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e9a21e;
+}
+
+.resultItem span {
+  font-weight: 500;
+  color: #333333;
+}

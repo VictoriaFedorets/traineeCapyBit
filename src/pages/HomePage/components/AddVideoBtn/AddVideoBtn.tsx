@@ -1,5 +1,5 @@
 import css from "./AddVideoBtn.module.css";
-import { selectIsLoggedIn } from "redux/user/userSelectors";
+import { selectIsLoggedIn } from "redux/user/selectors";
 import Plus from "icons/Plus";
 import { useState } from "react";
 import AddVideoForm from "@components/AddVideoForm/AddVideoForm";

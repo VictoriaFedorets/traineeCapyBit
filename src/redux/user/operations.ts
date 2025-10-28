@@ -179,7 +179,7 @@ export const refreshSession = createAsyncThunk<
 // sendResetPasswordEmail
 export const sendResetPasswordEmail = createAsyncThunk<
   ConfirmEmailResponse,
-  Pick<UserRequestProps, "email">, // отправляем только email
+  Pick<UserRequestProps, "email">,
   { rejectValue: string }
 >("user/sendResetPasswordEmail", async (payload, thunkAPI) => {
   try {
@@ -202,7 +202,7 @@ export const sendResetPasswordEmail = createAsyncThunk<
 // Reset Password
 export const resetPassword = createAsyncThunk<
   ConfirmEmailResponse,
-  { token: string; newPassword: string }, // payload запроса
+  { token: string; newPassword: string },
   { rejectValue: string }
 >("user/resetPassword", async (payload, thunkAPI) => {
   try {

@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-import { confirmEmail } from "redux/user/userOperations";
+import { confirmEmail } from "redux/user/operations";
 import { useAppDispatch } from "redux/hooks";
 
 const ConfirmEmailPage: React.FC = () => {

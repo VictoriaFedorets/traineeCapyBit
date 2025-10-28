@@ -1,0 +1,55 @@
+.inputWrapper {
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 0;
+  border-top: 1px solid #faf7f3e3;
+  gap: 8px;
+  background-color: #fff;
+}
+
+.inputWrapper input {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  min-width: 0;
+}
+
+.inputWrapper button {
+  background-color: #e9a21e;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease-in-out;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.inputWrapper button:hover {
+  background-color: #e0873a;
+}
+
+.textarea {
+  flex: 1;
+  min-height: 40px;
+  max-height: 120px;
+  resize: none;
+  overflow-y: auto;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media screen and (min-width: 768px) {
+  .inputWrapper {
+    padding: 8px 16px;
+  }
+}

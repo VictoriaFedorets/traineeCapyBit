@@ -1,10 +1,11 @@
 import css from "./BurgerMenu.module.css";
 import { useEffect, useRef } from "react";
-import { selectIsLoggedIn, selectUser } from "../../redux/user/userSelectors";
+import { selectIsLoggedIn, selectUser } from "../../redux/user/selectors";
 import { Link } from "react-router-dom";
 import CloseIcon from "icons/Close";
 import LogOutBtn from "@components/LogOutBtn/LogOutBtn";
 import { useAppSelector } from "redux/hooks";
+import ChatIcon from "icons/Chat";
 
 interface BurgerMenuProps {
   openModal: () => void;
@@ -52,10 +53,14 @@ export default function BurgerMenu({ closeBurger, isOpen }: BurgerMenuProps) {
 
         <div className={css.menuContent}>
           {isLoggedIn ? (
-            <div>
-              <p className={css.text}>
+            <div className={css.linkBlock}>
+              <p>
                 Hello, {user?.name}! You can add a video to your video player.
               </p>
+              <Link to="/chats" className={css.btnChat} onClick={closeBurger}>
+                <span>Go to chats</span> {""}
+                <ChatIcon className={css.iconChat} />
+              </Link>
             </div>
           ) : (
             <p className={css.text}>

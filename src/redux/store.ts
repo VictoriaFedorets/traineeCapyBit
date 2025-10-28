@@ -11,7 +11,9 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import videosReducer from "./videos/slice";
-import userReducer from "./user/userSlice";
+import userReducer from "./user/slice";
+import chatsReducer from "./chats/slice";
+import weatherReducer from "./weather/slice";
 
 const persistConfig = {
   key: "root",
@@ -21,6 +23,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   videos: videosReducer,
+  chats: chatsReducer,
+  weather: weatherReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

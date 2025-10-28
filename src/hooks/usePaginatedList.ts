@@ -13,24 +13,25 @@ export function usePaginatedList<T>({
 }: UsePaginatedListOptions<T>) {
   const [visibleItems, setVisibleItems] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
-  const [showMore, setShowMore] = useState(true);
+  const [page, setPage] = useState(1);
 
+  // Сбрасываем список только при смене items (например, новый videoId)
   useEffect(() => {
     setVisibleItems(items.slice(0, perPage));
-    setShowMore(items.length > perPage);
+    setPage(1);
   }, [items, perPage]);
 
+  const showMore = visibleItems.length < items.length;
+
   const fetchMoreItems = () => {
-    if (loading) return;
+    if (loading || !showMore) return;
 
     setLoading(true);
     setTimeout(() => {
-      const nextItems = items.slice(
-        visibleItems.length,
-        visibleItems.length + perPage
-      );
-      setVisibleItems((prev) => [...prev, ...nextItems]);
-      setShowMore(visibleItems.length + nextItems.length < items.length);
+      const nextPage = page + 1;
+      const nextItems = items.slice(0, nextPage * perPage);
+      setVisibleItems(nextItems);
+      setPage(nextPage);
       setLoading(false);
     }, delay);
   };

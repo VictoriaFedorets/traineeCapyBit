@@ -9,9 +9,8 @@ import {
   fetchCommentsByVideo,
   toggleLikeVideo,
   fetchLikesCount,
-  addVideoView,
 } from "./operations";
-import { logout } from "../user/userOperations";
+import { logout } from "../user/operations";
 import { FetchCommentsResponse, VideoData, VideosState } from "./types";
 
 const initialState: VideosState = {

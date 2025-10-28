@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { usePaginatedList } from "hooks/usePaginatedList";
 import css from "./CommentsSection.module.css";
 import { selectCommentsByVideoId } from "redux/videos/selectors";
-import { selectUser } from "redux/user/userSelectors";
+import { selectUser } from "redux/user/selectors";
 import {
   addCommentToVideo,
   fetchCommentsByVideo,
@@ -47,8 +47,10 @@ export default function CommentsSection({ videoId }: CommentsSectionProps) {
     usePaginatedList({ items: comments, perPage: 3, delay: 1000 });
 
   useEffect(() => {
-    dispatch(fetchCommentsByVideo({ videoId }));
-  }, [dispatch, videoId]);
+    if (comments.length === 0) {
+      dispatch(fetchCommentsByVideo({ videoId }));
+    }
+  }, [dispatch, videoId, comments.length]);
 
   useEffect(() => {
     const textarea = textareaRef.current;

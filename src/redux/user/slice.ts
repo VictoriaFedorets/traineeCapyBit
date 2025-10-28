@@ -8,7 +8,7 @@ import {
   refreshSession,
   resetPassword,
   sendResetPasswordEmail,
-} from "./userOperations";
+} from "./operations";
 
 export interface UserDataProps {
   id: string;
@@ -38,7 +38,7 @@ const initialState: UserStateProps = {
   isLoggedIn: !!savedAccessToken,
 };
 
-const userSlice = createSlice({
+const slice = createSlice({
   name: "user",
   initialState,
   reducers: {},
@@ -135,4 +135,4 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice.reducer;
+export default slice.reducer;

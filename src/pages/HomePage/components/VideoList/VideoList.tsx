@@ -9,7 +9,7 @@ import DeleteVideoBtn from "@pages/HomePage/components/VideoList/DeleteVideoBtn/
 import InfiniteScrollWrapper from "components/InfiniteScrollWrapper/InfiniteScrollWrapper";
 import { usePaginatedList } from "../../../../hooks/usePaginatedList";
 import AddVideoBtn from "../AddVideoBtn/AddVideoBtn";
-import { selectAccessToken } from "../../../../redux/user/userSelectors";
+import { selectAccessToken } from "../../../../redux/user/selectors";
 
 export default function VideoList() {
   const dispatch = useAppDispatch();
