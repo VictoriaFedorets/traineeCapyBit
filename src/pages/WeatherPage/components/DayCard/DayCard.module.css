@@ -1,0 +1,71 @@
+.dayCard {
+  flex: 0 0 100px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #d8e3f0;
+  justify-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dayCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dayCard.active {
+  background: linear-gradient(to bottom, #e3f1ff 0%, #ffffff 100%);
+  border: 1px solid #9dc2f0;
+}
+
+.date {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.temps {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.max {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+.min {
+  color: #1976d2;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .dayCard {
+    flex: 0 0 100px;
+    padding: 14px 0;
+    flex: 1 1 auto;
+  }
+
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .temps {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+}

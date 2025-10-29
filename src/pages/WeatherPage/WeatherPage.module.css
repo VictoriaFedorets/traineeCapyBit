@@ -1,0 +1,85 @@
+.container {
+  max-width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background: linear-gradient(180deg, #fffff5 0%, #edf4fb 100%);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+  text-align: center;
+  color: #1e2023;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.daysGrid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100px;
+  overflow-x: auto;
+  gap: 10px;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.daysGrid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.daysGrid::-webkit-scrollbar-thumb {
+  background-color: #a8c4eb;
+  border-radius: 3px;
+}
+
+.loading {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  padding: 30px 0;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 700px;
+    padding: 25px;
+    border-radius: 14px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-bottom: 25px;
+  }
+
+  .daysGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    overflow: visible;
+    justify-content: center; /* центр всей сетки */
+    align-items: center;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 100%;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .title {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
+  .daysGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+}

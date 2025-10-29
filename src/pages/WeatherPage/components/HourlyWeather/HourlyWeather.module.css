@@ -1,0 +1,121 @@
+.hoursWrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #d0e2f2;
+  padding: 10px 6px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.4s ease;
+  margin-top: 15px;
+}
+
+.hoursScroll {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+}
+
+.hoursScroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.hoursScroll::-webkit-scrollbar-thumb {
+  background-color: #a8c4eb;
+  border-radius: 4px;
+}
+
+.hourCard {
+  flex: 0 0 90px;
+  background: #f0f6fd;
+  border-radius: 10px;
+  text-align: center;
+  padding: 6px 0;
+  border: 1px solid #cbdced;
+  transition: 0.3s;
+}
+
+.hourCard:hover {
+  background: #e7f0fc;
+}
+
+.hourTime {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+.hourIcon {
+  width: 30px;
+  height: 30px;
+  margin: 4px auto;
+}
+
+.hourTemp {
+  font-size: 14px;
+  font-weight: 600;
+  color: #d32f2f;
+}
+
+.hourDesc {
+  font-size: 11px;
+  color: #555;
+  text-transform: capitalize;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .hoursWrapper {
+    padding: 15px 10px;
+  }
+
+  .hourCard {
+    flex: 0 0 120px;
+    padding: 8px 0;
+  }
+
+  .hourIcon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .hourTemp {
+    font-size: 15px;
+  }
+
+  .hourDesc {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hourCard {
+    flex: 0 0 125px;
+    padding: 10px 0;
+  }
+
+  .hourIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hourTemp {
+    font-size: 16px;
+  }
+
+  .hourDesc {
+    font-size: 12px;
+  }
+}
