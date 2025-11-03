@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+  max-width: 300px;
+}
+
+.input {
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  background: #f2f2f2;
+  color: #4a4949;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.input:focus {
+  background: #a8c4eb;
+  box-shadow: 0 0 0 2px #a8c4eb;
+}
+
+.dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  color: #4a4949;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  list-style: none;
+  padding: 4px 0;
+  margin: 4px 0 0;
+}
+
+.option {
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.option:hover {
+  background: #a8c4eb;
+  color: #4a4949;
+}
+
+@media screen and (min-width: 768px) {
+  .input {
+    padding: 10px 12px;
+  }
+}

@@ -41,6 +41,10 @@
   padding: 30px 0;
 }
 
+.selectBlock {
+  margin-bottom: 16px;
+}
+
 @media (min-width: 768px) {
   .container {
     max-width: 700px;
@@ -58,8 +62,13 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 14px;
     overflow: visible;
-    justify-content: center; /* центр всей сетки */
+    justify-content: center;
     align-items: center;
+  }
+
+  .selectBlock {
+    display: flex;
+    justify-content: space-between;
   }
 }
 

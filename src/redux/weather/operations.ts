@@ -30,24 +30,29 @@ export const fetchWeatherNow = createAsyncThunk<
 
 export const fetchWeatherForecast = createAsyncThunk<
   WeatherForecastData,
-  { lat: number; lon: number },
+  { lat: number; lon: number; days?: number },
   { rejectValue: string }
->("weather/fetchForecast", async (coords, { rejectWithValue }) => {
-  try {
-    const res = await api.get<WeatherForecastData>("/weather/forecast", {
-      params: coords,
-    });
-    return res.data;
-  } catch (error) {
-    let message = "Request error";
-    if ((error as AxiosError).isAxiosError) {
-      const errData = (error as AxiosError).response?.data;
-      if (errData && typeof errData === "object" && "message" in errData) {
-        message = (errData as { message: string }).message;
-      }
-    }
+>(
+  "weather/fetchForecast",
+  async ({ lat, lon, days = 5 }, { rejectWithValue }) => {
+    try {
+      const cnt = days * 8;
 
-    toast.error(message);
-    return rejectWithValue(message);
+      const res = await api.get<WeatherForecastData>("/weather/forecast", {
+        params: { lat, lon, cnt },
+      });
+      return res.data;
+    } catch (error) {
+      let message = "Request error";
+      if ((error as AxiosError).isAxiosError) {
+        const errData = (error as AxiosError).response?.data;
+        if (errData && typeof errData === "object" && "message" in errData) {
+          message = (errData as { message: string }).message;
+        }
+      }
+
+      toast.error(message);
+      return rejectWithValue(message);
+    }
   }
-});
+);

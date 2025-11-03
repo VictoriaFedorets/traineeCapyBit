@@ -6,6 +6,8 @@ import { useGroupedForecast } from "hooks/useGroupedForecast";
 import DayCard from "./components/DayCard/DayCard";
 import HourlyWeather from "./components/HourlyWeather/HourlyWeather";
 import css from "./WeatherPage.module.css";
+import DaysCountButtons from "./components/DaysCountButtons/DaysCountButtons";
+import CitySearch from "./components/CitySearch/CitySearch";
 
 export default function WeatherPage() {
   const dispatch = useAppDispatch();
@@ -18,10 +20,12 @@ export default function WeatherPage() {
   const groupedByDay = useGroupedForecast(forecast);
 
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [daysCount, setDaysCount] = useState(5);
 
   useEffect(() => {
-    if (lat && lon) dispatch(fetchWeatherForecast({ lat, lon }));
-  }, [lat, lon, dispatch]);
+    if (lat && lon)
+      dispatch(fetchWeatherForecast({ lat, lon, days: daysCount }));
+  }, [lat, lon, daysCount, dispatch]);
 
   useEffect(() => {
     if (forecast && forecast.list.length > 0) {
@@ -33,13 +37,19 @@ export default function WeatherPage() {
 
   if (!forecast) return <p className={css.loading}>Loading forecast...</p>;
 
-  const days = Object.keys(groupedByDay).slice(0, 5);
+  const days = Object.keys(groupedByDay).slice(0, daysCount);
 
   return (
     <div className={css.container}>
       <h2 className={css.title}>
-        5-day weather forecast <span>{forecast.city.name}</span>
+        {daysCount}-{daysCount === 1 ? "day" : "days"} weather forecast{" "}
+        <span>{forecast.city.name}</span>
       </h2>
+
+      <div className={css.selectBlock}>
+        <DaysCountButtons daysCount={daysCount} onChange={setDaysCount} />
+        <CitySearch />
+      </div>
 
       <div className={css.daysGrid}>
         {days.map((date) => (
